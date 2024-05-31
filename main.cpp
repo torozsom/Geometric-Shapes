@@ -42,12 +42,12 @@ int main() {
 
         switch(c){
             case '1':
-                LogFile("figures.txt");
+                LogFile("../figures.txt");
                 break;
 
             case '2':
                 data.Erase();
-                StoreFigures("figures.txt", &data);
+                StoreFigures("../figures.txt", &data);
                 break;
 
             case '3':
