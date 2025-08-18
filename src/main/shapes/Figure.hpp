@@ -19,7 +19,7 @@ class Figure {
     Point point;
 
   public:
-    Figure() : middle(), point() {}
+    Figure() = default;
     Figure(const Point& p1, const Point& p2) : middle(p1), point(p2) {}
 
 
@@ -32,14 +32,14 @@ class Figure {
 
 
     virtual void Translate(const Point& v) = 0;
-    virtual double Circumference() const = 0;
-    virtual double Area() const = 0;
-    virtual bool InnerPoint(const Point& p) const = 0;
-    virtual bool InsideCircle(double r) const = 0;
+    [[nodiscard]] virtual double Circumference() const = 0;
+    [[nodiscard]] virtual double Area() const = 0;
+    [[nodiscard]] virtual bool InnerPoint(const Point& p) const = 0;
+    [[nodiscard]] virtual bool InsideCircle(double r) const = 0;
     virtual void Log() const = 0;
 
 
-    virtual ~Figure() {}
+    virtual ~Figure() = default;
 };
 
 

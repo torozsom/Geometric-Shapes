@@ -13,14 +13,15 @@
 #include "Polygon.hpp"
 
 
-class Square : public Polygon {
+class Square final : public Polygon {
 
   public:
-    Square() : Polygon() {}
+    Square() = default;
     Square(const Point& p1, const Point& p2) : Polygon(p1, p2, 4) {}
     Square(const Square& s) : Polygon(s.middle, s.point, 4) {}
 
 
+    [[nodiscard]]
     double Area() const override {
         return pow(Distance(vertices[0], vertices[1]), 2);
     }
@@ -35,7 +36,7 @@ class Square : public Polygon {
     }
 
 
-    ~Square() override {}
+    ~Square() override = default;
 };
 
 #endif // SQUARE_HPP

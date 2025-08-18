@@ -16,16 +16,16 @@ class String {
 
   private:
     char* data;
-    unsigned len; // without \0
+    unsigned len{}; // without \0
 
   public:
     String();
     String(const String& s);
-    String(const char* s);
+    explicit String(const char* s);
 
 
-    unsigned length() const;
-    char* c_str() const;
+    [[nodiscard]] unsigned length() const;
+    [[nodiscard]] char* c_str() const;
 
 
     String& operator=(const String& s);

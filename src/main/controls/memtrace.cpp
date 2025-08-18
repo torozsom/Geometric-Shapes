@@ -45,12 +45,12 @@ typo:       2019.
 START_NAMESPACE
 static FILE* fperror;
 #    ifdef MEMTRACE_TO_MEMORY
-static const unsigned int CANARY_LEN = 64;
+static constexpr unsigned int CANARY_LEN = 64;
 #    else
 static const unsigned int CANARY_LEN = 0;
 #    endif
-static const unsigned char canary_byte1 = 'k';
-static const unsigned char canary_byte2 = 'K';
+static constexpr unsigned char canary_byte1 = 'k';
+static constexpr unsigned char canary_byte2 = 'K';
 static unsigned char random_byte;
 
 typedef enum { FALSE, TRUE } BOOL;
@@ -85,7 +85,7 @@ static char* StrCpy(char** to, const char* from) {
 }
 
 static void* canary_malloc(const size_t size, const unsigned char data) {
-    char* p = (char*)malloc(size + 2 * CANARY_LEN);
+    const auto p = (char*)malloc(size + 2 * CANARY_LEN);
     if (p) {
         memset(p, canary_byte1, CANARY_LEN);
         memset(p + CANARY_LEN, data, size);
@@ -95,7 +95,7 @@ static void* canary_malloc(const size_t size, const unsigned char data) {
 }
 
 static int chk_canary(void* p, const size_t size) {
-    unsigned char* pc = (unsigned char*)p;
+    const unsigned char* pc = (unsigned char*)p;
     unsigned int i;
     for (i = 0; i < CANARY_LEN; i++)
         if (pc[i] != canary_byte1)
@@ -137,7 +137,7 @@ static void print_call(const char* msg, call_t call) {
 /* memoriateruletet dump */
 static void dump_memory(void const* mem, size_t size, const size_t can_len,
                         FILE* fp) {
-    unsigned char const* m = (unsigned char const*)mem;
+    const auto m = (unsigned char const*)mem;
     unsigned int s, o;
 
     if (can_len > 0)
@@ -280,7 +280,7 @@ static BOOL register_memory(void* p, const size_t size, call_t call) {
 #    endif
 #    ifdef MEMTRACE_TO_MEMORY
     { /*C-blokk*/
-        registry_item* n = (registry_item*)malloc(sizeof(registry_item));
+        const auto n = (registry_item*)malloc(sizeof(registry_item));
         if (n == NULL)
             return FALSE;
         n->p = p;
@@ -321,7 +321,7 @@ static void unregister_memory(void* p, call_t call) {
             registry_item* r = n->next;
             n->next = r->next;
             if (COMP(r->call.f, call.f)) {
-                int chk = chk_canary(r->p, r->size);
+                const int chk = chk_canary(r->p, r->size);
                 if (chk < 0)
                     die("Blokk elott serult a memoria:", r->p, r->size,
                         &r->call, &call);
@@ -496,7 +496,7 @@ void traced_delete(void* pu, const int func) {
     initialize();
     if (pu) {
         /*kiolvasom call-t, ha van*/
-        memtrace::call_t call = delete_called
+        const memtrace::call_t call = delete_called
                                     ? (delete_call.f = func, delete_call)
                                     : pack(func, NULL, 0, NULL);
         memtrace::unregister_memory(P(pu), call);

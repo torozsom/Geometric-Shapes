@@ -7,7 +7,7 @@
 #include "Circle.hpp"
 
 // default ctor
-Circle::Circle() : Figure(), radius(0.0) {}
+Circle::Circle() : radius(0.0) {}
 
 // ctor
 Circle::Circle(const Point& p1, const Point& p2)
@@ -62,7 +62,7 @@ bool Circle::InnerPoint(const Point& p) const {
  * @return bool
  */
 bool Circle::InsideCircle(const double r) const {
-    return (Distance(Point(0.0, 0.0), middle) + radius) <= r;
+    return Distance(Point(0.0, 0.0), middle) + radius <= r;
 }
 
 

@@ -13,16 +13,17 @@
 #include "Polygon.hpp"
 
 
-class Triangle : public Polygon {
+class Triangle final : public Polygon {
 
   public:
-    Triangle() : Polygon() {}
+    Triangle() = default;
     Triangle(const Point& p1, const Point& p2) : Polygon(p1, p2, 3) {}
     Triangle(const Triangle& t) : Polygon(t.middle, t.point, 3) {}
 
 
+    [[nodiscard]]
     double Area() const override {
-        return (pow(Distance(vertices[0], vertices[1]), 2) * sqrt(3) / 4.0);
+        return pow(Distance(vertices[0], vertices[1]), 2) * sqrt(3) / 4.0;
     }
 
 
@@ -34,7 +35,7 @@ class Triangle : public Polygon {
         std::cout << "It's middle point is: " << middle << "\n\n";
     }
 
-    ~Triangle() override {};
+    ~Triangle() override = default;
 };
 
 #endif // TRIANGLE_HPP

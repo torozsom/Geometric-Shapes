@@ -13,14 +13,12 @@
  * @param filename the path of the text file
  */
 void LogFile(const char* filename) {
-
-    std::ifstream file(filename);
-    if (!file.is_open())
+    if (std::ifstream file(filename); !file.is_open())
         std::cerr << "Failed to open file.\n";
     else {
         std::cout << "Content of the file:\n"
                   << "--------------------------------\n";
-        const unsigned MAX_LEN = 256;
+        constexpr unsigned MAX_LEN = 256;
         char buffer[MAX_LEN];
 
         while (file.getline(buffer, MAX_LEN)) {
@@ -46,7 +44,7 @@ void StoreFigures(const char* filename, Shapes* data) {
         throw std::runtime_error("Could not open file!");
     }
 
-    const unsigned MAX_LEN = 256;
+    constexpr unsigned MAX_LEN = 256;
     char line[MAX_LEN];
     while (file.getline(line, MAX_LEN)) {
 
@@ -61,7 +59,7 @@ void StoreFigures(const char* filename, Shapes* data) {
         unsigned vertices;
         double mx, my, px, py;
 
-        int res1 = sscanf(temp[0], "%*[^0-9]%u", &vertices);
+        const int res1 = sscanf(temp[0], "%*[^0-9]%u", &vertices);
         sscanf(temp[1], " (%lf;%lf)", &mx, &my);
         sscanf(temp[2], " (%lf;%lf)", &px, &py);
 
@@ -73,25 +71,22 @@ void StoreFigures(const char* filename, Shapes* data) {
 
         if (res1 == 1) {
             Figure* fp = new Polygon(middle, point, vertices);
-            if (!(fp->InsideCircle(1.0)))
+            if (!fp->InsideCircle(1.0))
                 data->Add(fp);
         }
 
         if (type == "Circle") {
-            Figure* fp = new Circle(middle, point);
-            if (!(fp->InsideCircle(1.0)))
+            if (Figure* fp = new Circle(middle, point); !fp->InsideCircle(1.0))
                 data->Add(fp);
         }
 
         if (type == "Square") {
-            Figure* fp = new Square(middle, point);
-            if (!(fp->InsideCircle(1.0)))
+            if (Figure* fp = new Square(middle, point); !fp->InsideCircle(1.0))
                 data->Add(fp);
         }
 
         if (type == "Triangle") {
-            Figure* fp = new Triangle(middle, point);
-            if (!(fp->InsideCircle(1.0)))
+            if (Figure* fp = new Triangle(middle, point); !fp->InsideCircle(1.0))
                 data->Add(fp);
         }
     }

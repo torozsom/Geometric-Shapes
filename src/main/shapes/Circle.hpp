@@ -14,7 +14,7 @@
 #include "Figure.hpp"
 
 
-class Circle : public Figure {
+class Circle final : public Figure {
 
   private:
     double radius;
@@ -25,20 +25,20 @@ class Circle : public Figure {
     Circle(const Circle& c);
 
 
-    double getRadius() const;
+    [[nodiscard]] double getRadius() const;
     void setRadius(double val);
 
 
     void Translate(const Point& v) override;
-    double Circumference() const override;
-    double Area() const override;
-    bool InnerPoint(const Point& p) const override;
-    bool InsideCircle(double r) const override;
+    [[nodiscard]] double Circumference() const override;
+    [[nodiscard]] double Area() const override;
+    [[nodiscard]] bool InnerPoint(const Point& p) const override;
+    [[nodiscard]] bool InsideCircle(double r) const override;
     void Log() const override;
 
     bool operator==(const Circle& c) const;
 
-    ~Circle() {}
+    ~Circle() override = default;
 };
 
 std::ostream& operator<<(std::ostream& os, const Circle& c);

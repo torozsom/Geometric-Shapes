@@ -26,7 +26,7 @@ unsigned Shapes::getSize() const { return size; }
  */
 void Shapes::Add(Figure* fp) {
     if (fp != nullptr) {
-        Figure** temp = new Figure*[size + 1];
+        const auto temp = new Figure*[size + 1];
         for (unsigned i = 0; i < size; ++i)
             temp[i] = pData[i];
         delete[] pData;
@@ -71,7 +71,7 @@ void Shapes::Log() const {
  * @param idx the given index
  * @return Figure*
  */
-Figure* Shapes::operator[](const unsigned idx) { return pData[idx]; }
+Figure* Shapes::operator[](const unsigned idx) const { return pData[idx]; }
 
 
 // dtor

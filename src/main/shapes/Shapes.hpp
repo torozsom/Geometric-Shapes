@@ -24,13 +24,13 @@ class Shapes {
   public:
     Shapes();
 
-    unsigned getSize() const;
+    [[nodiscard]] unsigned getSize() const;
 
     void Add(Figure* fp);
     void Erase();
     void Log() const;
 
-    Figure* operator[](unsigned idx);
+    Figure* operator[](unsigned idx) const;
 
     ~Shapes();
 };

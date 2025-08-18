@@ -5,7 +5,7 @@ set(CMAKE_CXX_STANDARD 23)
 
 add_definitions(-DMEMTRACE)
 
-add_executable(NHF
+add_executable(GeometricShapes
         src/main/shapes/Figure.hpp
         src/main/shapes/Circle.hpp
         src/main/shapes/Circle.cpp

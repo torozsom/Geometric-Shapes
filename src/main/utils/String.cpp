@@ -5,7 +5,7 @@
 #include "String.hpp"
 
 // default ctor
-String::String() : len(0) {
+String::String() {
     data = new char[1];
     data[0] = '\0';
 }
@@ -112,8 +112,8 @@ String::~String() {
  * @return String
  */
 String operator+(const String& s1, const String& s2) {
-    size_t len = s1.length() + s2.length();
-    char* temp = new char[len + 1];
+    const size_t len = s1.length() + s2.length();
+    const auto temp = new char[len + 1];
 
     strcpy(temp, s1.c_str());
     strcat(temp, s2.c_str());

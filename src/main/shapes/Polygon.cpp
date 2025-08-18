@@ -10,7 +10,7 @@
 
 
 // default ctor
-Polygon::Polygon() : Figure(), size(0) {}
+Polygon::Polygon() : size(0) {}
 
 
 /**
@@ -25,7 +25,7 @@ Polygon::Polygon(const Point& p1, const Point& p2, const unsigned n) : size(n) {
         throw std::invalid_argument(
             "You cannot set the number of vertices to this number!");
     setMiddle(p1);
-    double innerAngle = 360.0 / n;
+    const double innerAngle = 360.0 / n;
 
     vertices[0] = p2;
     for (unsigned i = 1; i < size; ++i) {
@@ -47,7 +47,7 @@ Polygon::Polygon(const Polygon& p) : Figure(p.middle, p.point), size(p.size) {
 unsigned Polygon::getSize() const { return size; }
 
 
-Point* Polygon::getVertices() const { return (Point*)vertices; }
+Point* Polygon::getVertices() const { return const_cast<Point *>(vertices); }
 
 
 // Setter — sets the size of the polygon
@@ -86,8 +86,8 @@ double Polygon::Circumference() const {
 
 // Calculates the area of the current polygon
 double Polygon::Area() const {
-    double s = Distance(vertices[0], vertices[1]);
-    double triangle = (s * s) / (4.0 * tan(M_PI / size));
+    const double s = Distance(vertices[0], vertices[1]);
+    const double triangle = s * s / (4.0 * tan(M_PI / size));
     return size * triangle;
 }
 
@@ -102,18 +102,16 @@ bool Polygon::InnerPoint(const Point& p) const {
     unsigned count = 0;
 
     for (unsigned i = 0; i < size; ++i) {
-        Point current = vertices[i];
-        Point next = vertices[(i + 1) % size];
+        const Point current = vertices[i];
 
-        if ((current.y > p.y) != (next.y > p.y)) {
-            double intersectX = (next.x - current.x) * (p.y - current.y) /
-                                    (next.y - current.y) +
-                                current.x;
+        if (const Point next = vertices[(i + 1) % size]; current.y > p.y != next.y > p.y) {
+            const double intersectX = (next.x - current.x) * (p.y - current.y) /
+                                      (next.y - current.y) + current.x;
             if (p.x < intersectX)
                 count++;
         }
     }
-    return (count % 2) == 1;
+    return count % 2 == 1;
 }
 
 
@@ -124,14 +122,12 @@ bool Polygon::InnerPoint(const Point& p) const {
  * @return bool
  */
 bool Polygon::InsideCircle(const double r) const {
-    Point origin(0.0, 0.0);
+    const Point origin(0.0, 0.0);
 
-    for (unsigned i = 0; i < size; ++i) {
-        double d = Distance(origin, vertices[i]);
-
-        if (d > r)
+    for (unsigned i = 0; i < size; ++i)
+        if (const double d = Distance(origin, vertices[i]); d > r)
             return false;
-    }
+
     return true;
 }
 
@@ -146,11 +142,11 @@ void Polygon::Log() const {
 
 
 bool Polygon::operator==(const Polygon& p) const {
-    if (!(middle == p.middle))
+    if (middle != p.middle)
         return false;
 
     for (unsigned i = 0; i < getSize(); ++i)
-        if (!(vertices[i] == p.vertices[i]))
+        if (vertices[i] != p.vertices[i])
             return false;
     return true;
 }

@@ -15,23 +15,23 @@ Point::Point() : x(0), y(0) {}
 Point::Point(const double x, const double y) : x(x), y(y) {}
 
 // copy ctor
-Point::Point(const Point& p) : x(p.x), y(p.y) {}
+Point::Point(const Point& p) = default;
 
 
 /**
  * @brief Rotates the current point around
  * another through the given angle
  * @param center the center point of rotation
- * @param degrees the angle of rotation in degrees
+ * @param angle the angle of rotation in degrees
  */
-void Point::Rotation(const Point& center, const double degrees) {
-    double radians = degrees * M_PI / 180.0;
+void Point::Rotation(const Point& center, const double angle) {
+    const double radians = angle * M_PI / 180.0;
 
-    double cosTheta = cos(radians);
-    double sinTheta = sin(radians);
+    const double cosTheta = cos(radians);
+    const double sinTheta = sin(radians);
 
-    double newX = x - center.x;
-    double newY = y - center.y;
+    const double newX = x - center.x;
+    const double newY = y - center.y;
 
     x = center.x + newX * cosTheta - newY * sinTheta;
     y = center.y + newX * sinTheta + newY * cosTheta;
@@ -39,11 +39,7 @@ void Point::Rotation(const Point& center, const double degrees) {
 
 
 // Assignment operator
-Point& Point::operator=(const Point& p) {
-    this->x = p.x;
-    this->y = p.y;
-    return *this;
-}
+Point& Point::operator=(const Point& p) = default;
 
 
 /**
@@ -95,7 +91,7 @@ bool Point::operator==(const Point& p) const {
 }
 
 // dtor
-Point::~Point() {}
+Point::~Point() = default;
 
 
 /**

@@ -18,8 +18,9 @@ void test1() {
     //  ***ROTATION OF A VECTOR***
 
 
-    Point V0(5, 6), center(4, 1);
-    Point rotated(-1.0, 2.0);
+    Point V0(5, 6);
+    const Point center(4, 1);
+    const Point rotated(-1.0, 2.0);
 
 
     std::cout
@@ -41,8 +42,8 @@ void test1() {
     //  ***ADDITION OF VECTORS***
 
 
-    Point v1(1, 2), v2(3, 4), sum = v1 + v2, sub = v2 - v1;
-    Point res1(4, 6), res2(2, 2);
+    const Point v1(1, 2), v2(3, 4), sum = v1 + v2, sub = v2 - v1;
+    const Point res1(4, 6), res2(2, 2);
 
 
     std::cout << "2. Addition of vectors:\n"
@@ -101,9 +102,9 @@ void test2() {
     //  ***TRANSLATION***
 
 
-    Point V0(6.55, 8.75);
+    const Point V0(6.55, 8.75);
     Circle C0(Point(5.40, 8.3), Point(7.22, 9.78));
-    Circle res(Point(11.95, 17.05), Point(13.77, 18.53));
+    const Circle res(Point(11.95, 17.05), Point(13.77, 18.53));
 
 
     std::cout << "1. Translating a circle by a given vector:\n\n"
@@ -129,14 +130,14 @@ void test2() {
     //  ***INNER POINT***
 
 
-    Point P1(6.1, 8.5);
-    Circle C1(Point(5.05, 8.35), Point(8.82, 10.68));
+    const Point P1(6.1, 8.5);
+    const Circle C1(Point(5.05, 8.35), Point(8.82, 10.68));
 
     std::cout << "2. Checking inner point: \n\n"
               << "Let the point be: " << P1 << '\n';
 
     C1.Log();
-    bool inner = C1.InnerPoint(P1);
+    const bool inner = C1.InnerPoint(P1);
 
     std::cout << "Expected: \t true\n"
               << "Actual: \t " << std::boolalpha << inner << '\n';
@@ -150,14 +151,14 @@ void test2() {
     //  ***INSIDE A CIRCLE***
 
 
-    Circle C2(Point(2.34, 3.89), Point(4.81, 5.75));
+    const Circle C2(Point(2.34, 3.89), Point(4.81, 5.75));
 
     std::cout << "3. Cheking if a given circle is inside another circle \n"
               << "that is centered at the origin and has a radius R.\n\n"
               << "Let R be 8.76\n";
     C2.Log();
 
-    bool inside = C2.InsideCircle(8.76);
+    const bool inside = C2.InsideCircle(8.76);
 
     std::cout << "Expected: \t true\n"
               << "Actual: \t " << std::boolalpha << inside << '\n';
@@ -183,10 +184,10 @@ void test3() {
     //  ***TRANSLATION***
 
 
-    Point V0(6.55, 8.75);
+    const Point V0(6.55, 8.75);
     Polygon Poly0(Point(5.40, 8.3), Point(7.22, 9.78), 5);
 
-    Polygon res0(Point(11.95, 17.05), Point(13.77, 18.53), 5);
+    const Polygon res0(Point(11.95, 17.05), Point(13.77, 18.53), 5);
 
     std::cout << "1. Translating a polygon by a given vector:\n\n"
               << "Let the vector be: " << V0 << '\n'
@@ -211,7 +212,7 @@ void test3() {
 
 
     Polygon Poly1(Point(0, 0), Point(2, 0), 6);
-    Polygon res1(Point(0, 0), Point(0, 2), 6);
+    const Polygon res1(Point(0, 0), Point(0, 2), 6);
 
     std::cout << "2. Rotating a polygon by a given angle: \n\n"
               << "Let the angle be 90 degrees.\n";
@@ -234,14 +235,14 @@ void test3() {
     //  ***INNER POINT***
 
 
-    Point P2(4.3, 5.7);
-    Polygon Poly2(Point(2.5, 3.8), Point(8.8, 9.3), 7);
+    const Point P2(4.3, 5.7);
+    const Polygon Poly2(Point(2.5, 3.8), Point(8.8, 9.3), 7);
 
     std::cout << "3. Checking inner point: \n\n"
               << "Let the point be: " << P2 << '\n';
 
     Poly2.Log();
-    bool inner = Poly2.InnerPoint(P2);
+    const bool inner = Poly2.InnerPoint(P2);
 
     std::cout << "Expected: true\n"
               << "Actual:\t " << std::boolalpha << inner << '\n';
@@ -255,14 +256,14 @@ void test3() {
     //  ***INSIDE A CIRCLE***
 
 
-    Polygon Poly3(Point(2.6, 6.8), Point(4.3, 5.9), 8);
+    const Polygon Poly3(Point(2.6, 6.8), Point(4.3, 5.9), 8);
 
     std::cout << "4. Cheking if a given polygon is inside a circle \n"
               << "that is centered at the origin and has a radius R.\n\n"
               << "Let R be 10.45\n";
     Poly3.Log();
 
-    bool inside = Poly3.InsideCircle(10.45);
+    const bool inside = Poly3.InsideCircle(10.45);
     std::cout << "Expected: true\n"
               << "Actual: " << std::boolalpha << inside << '\n';
 
@@ -293,7 +294,7 @@ void test4() {
     container.Add(new Square(Point(3.2, 4.5), Point(7.6, 7.1)));
 
     container.Log();
-    unsigned size = container.getSize();
+    const unsigned size = container.getSize();
 
     std::cout << "Expected size: 4\n"
               << "Actual size: " << size << '\n';
@@ -306,7 +307,7 @@ void test4() {
 
     std::cout << "Let's now erase the content of the container!\n";
     container.Erase();
-    unsigned erased = container.getSize();
+    const unsigned erased = container.getSize();
 
     std::cout << "Expected size: 0\n"
               << "Actual size: " << erased << '\n';

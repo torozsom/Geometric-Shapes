@@ -72,8 +72,9 @@ int main() {
                       << "\t1: Point class\n"
                       << "\t2: Circle class\n"
                       << "\t3: Polygon class\n"
-                      << "\t4: Shapes class\n\n"
-                      << "Enter a number(1-4): ";
+                      << "\t4: Shapes class\n"
+                      << "\t5: All\n\n"
+                      << "Enter a number(1-5): ";
 
 
             std::cin >> test;
@@ -92,6 +93,13 @@ int main() {
                 break;
 
             case '4':
+                test4();
+                break;
+
+            case '5':
+                test1();
+                test2();
+                test3();
                 test4();
                 break;
 
