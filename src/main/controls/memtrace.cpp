@@ -114,7 +114,8 @@ typedef struct {
     char* file;
 } call_t;
 
-static call_t pack(const int f, const char* par_txt, const int line, const char* file) {
+static call_t pack(const int f, const char* par_txt, const int line,
+                   const char* file) {
     call_t ret;
     ret.f = f;
     ret.line = line;
@@ -174,7 +175,8 @@ void mem_dump(void const* mem, const size_t size, FILE* fp) {
 
 static BOOL dying;
 
-static void die(const char* msg, void* p, const size_t size, call_t* a, call_t* d) {
+static void die(const char* msg, void* p, const size_t size, call_t* a,
+                call_t* d) {
 #    ifdef MEMTRACE_ERRFILE
     fperror = fopen(XSTR(MEMTRACE_ERRFILE), "w");
 #    endif
@@ -374,8 +376,8 @@ void* traced_malloc(const size_t size, const char* par_txt, const int line,
     return NULL;
 }
 
-void* traced_calloc(const size_t count, size_t size, const char* par_txt, const int line,
-                    const char* file) {
+void* traced_calloc(const size_t count, size_t size, const char* par_txt,
+                    const int line, const char* file) {
     void* p;
     initialize();
     size *= count;
@@ -390,7 +392,8 @@ void* traced_calloc(const size_t count, size_t size, const char* par_txt, const 
     return NULL;
 }
 
-void traced_free(void* pu, const char* par_txt, const int line, const char* file) {
+void traced_free(void* pu, const char* par_txt, const int line,
+                 const char* file) {
     initialize();
     if (pu) {
         unregister_memory(P(pu), pack(FFREE, par_txt, line, file));
@@ -412,8 +415,8 @@ void traced_free(void* pu, const char* par_txt, const int line, const char* file
     }
 }
 
-void* traced_realloc(void* old, const size_t size, const char* par_txt, const int line,
-                     const char* file) {
+void* traced_realloc(void* old, const size_t size, const char* par_txt,
+                     const int line, const char* file) {
     void* p;
     size_t oldsize = 0;
     registry_item* n;
@@ -476,7 +479,8 @@ void set_delete_call(const int line, const char* file) {
     delete_called = TRUE;
 }
 
-void* traced_new(const size_t size, const int line, const char* file, const int func) {
+void* traced_new(const size_t size, const int line, const char* file,
+                 const int func) {
     initialize();
     for (;;) {
         void* p = canary_malloc(size, random_byte);
@@ -497,8 +501,8 @@ void traced_delete(void* pu, const int func) {
     if (pu) {
         /*kiolvasom call-t, ha van*/
         const memtrace::call_t call = delete_called
-                                    ? (delete_call.f = func, delete_call)
-                                    : pack(func, NULL, 0, NULL);
+                                          ? (delete_call.f = func, delete_call)
+                                          : pack(func, NULL, 0, NULL);
         memtrace::unregister_memory(P(pu), call);
         free(P(pu));
     }
@@ -506,11 +510,13 @@ void traced_delete(void* pu, const int func) {
 }
 END_NAMESPACE
 
-void* operator new(const size_t size, const int line, const char* file) THROW_BADALLOC {
+void* operator new(const size_t size, const int line,
+                   const char* file) THROW_BADALLOC {
     return memtrace::traced_new(size, line, file, FNEW);
 }
 
-void* operator new[](const size_t size, const int line, const char* file) THROW_BADALLOC {
+void* operator new[](const size_t size, const int line,
+                     const char* file) THROW_BADALLOC {
     return memtrace::traced_new(size, line, file, FNEWARR);
 }
 

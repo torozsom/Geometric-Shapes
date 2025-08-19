@@ -15,7 +15,8 @@
 
 
 /// For tests
-inline bool dEqual(const double d1, const double d2, const double tolerance = 1e-3) {
+inline bool dEqual(const double d1, const double d2,
+                   const double tolerance = 1e-3) {
     return std::fabs(d1 - d2) < tolerance;
 }
 
@@ -30,7 +31,7 @@ struct Point {
     Point(double x, double y);
     Point(const Point& p);
 
-    void Rotation(const Point& center, double angle);
+    void rotate(const Point& center, double angle);
 
 
     Point& operator=(const Point& p);
@@ -46,7 +47,6 @@ struct Point {
 std::ostream& operator<<(std::ostream& os, const Point& p);
 std::istream& operator>>(std::istream& is, Point& p);
 
-double Distance(const Point& p1, const Point& p2);
+double distance(const Point& p1, const Point& p2);
 
 #endif // POINT_HPP
-

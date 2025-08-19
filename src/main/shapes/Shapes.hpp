@@ -14,21 +14,21 @@
 
 class Shapes {
 
-  private:
     Figure** pData;
     unsigned size;
 
     Shapes(const Shapes& s);
     Shapes& operator=(const Shapes& s);
 
+
   public:
     Shapes();
 
     [[nodiscard]] unsigned getSize() const;
 
-    void Add(Figure* fp);
-    void Erase();
-    void Log() const;
+    void add(Figure* fp);
+    void erase();
+    void log() const;
 
     Figure* operator[](unsigned idx) const;
 

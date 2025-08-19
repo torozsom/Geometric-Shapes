@@ -1,9 +1,11 @@
 /***
- * \file figures_test.cpp
+ * \file Test.cpp
  * This file contains the test cases of the project.
  */
 
+
 #include "Test.hpp"
+
 
 /**
  * @brief Checks if a given vector can be
@@ -29,7 +31,7 @@ void test1() {
         << center << ".\n"
         << "\t Expected: \t" << rotated << '\n';
 
-    V0.Rotation(center, 90);
+    V0.rotate(center, 90);
     std::cout << "\t Actual: \t" << V0 << "\n";
 
 
@@ -81,9 +83,9 @@ void test1() {
               << "\t Let the points be " << v1 << " and the other " << v2
               << "\n"
               << "\t Expected: \t" << sqrt(8) << '\n';
-    std::cout << "\t Actual: \t" << Distance(v1, v2) << "\n";
+    std::cout << "\t Actual: \t" << distance(v1, v2) << "\n";
 
-    if (dEqual(Distance(v1, v2), sqrt(8)))
+    if (dEqual(distance(v1, v2), sqrt(8)))
         std::cout << "Correct distance!\n\n\n";
     else
         std::cerr << "Incorrect distance!\n\n\n";
@@ -110,15 +112,15 @@ void test2() {
     std::cout << "1. Translating a circle by a given vector:\n\n"
               << "Let the vector be: " << V0 << '\n'
               << "Current properties:\n";
-    C0.Log();
+    C0.log();
 
     std::cout << "\nExpected: \n";
 
-    res.Log();
-    C0.Translate(V0);
+    res.log();
+    C0.translate(V0);
 
     std::cout << "\nActual: \n";
-    C0.Log();
+    C0.log();
     std::cout << '\n';
 
     if (C0 == res)
@@ -136,8 +138,8 @@ void test2() {
     std::cout << "2. Checking inner point: \n\n"
               << "Let the point be: " << P1 << '\n';
 
-    C1.Log();
-    const bool inner = C1.InnerPoint(P1);
+    C1.log();
+    const bool inner = C1.innerPoint(P1);
 
     std::cout << "Expected: \t true\n"
               << "Actual: \t " << std::boolalpha << inner << '\n';
@@ -156,9 +158,9 @@ void test2() {
     std::cout << "3. Cheking if a given circle is inside another circle \n"
               << "that is centered at the origin and has a radius R.\n\n"
               << "Let R be 8.76\n";
-    C2.Log();
+    C2.log();
 
-    const bool inside = C2.InsideCircle(8.76);
+    const bool inside = C2.insideCircle(8.76);
 
     std::cout << "Expected: \t true\n"
               << "Actual: \t " << std::boolalpha << inside << '\n';
@@ -193,14 +195,14 @@ void test3() {
               << "Let the vector be: " << V0 << '\n'
               << "Current properties:\n";
 
-    Poly0.Log();
+    Poly0.log();
 
     std::cout << "\nExpected: \n";
-    res0.Log();
+    res0.log();
 
-    Poly0.Translate(V0);
+    Poly0.translate(V0);
     std::cout << "\nActual: \n";
-    Poly0.Log();
+    Poly0.log();
 
     if (res0 == Poly0)
         std::cout << "Succesful translation!\n\n";
@@ -217,14 +219,14 @@ void test3() {
     std::cout << "2. Rotating a polygon by a given angle: \n\n"
               << "Let the angle be 90 degrees.\n";
 
-    Poly1.Log();
+    Poly1.log();
 
     std::cout << "Expected: \n";
-    res1.Log();
+    res1.log();
     std::cout << "Actual: \n";
 
-    Poly1.Rotate(90);
-    Poly1.Log();
+    Poly1.rotate(90);
+    Poly1.log();
 
     if (res1 == Poly1)
         std::cout << "Succesful rotation!\n\n";
@@ -241,8 +243,8 @@ void test3() {
     std::cout << "3. Checking inner point: \n\n"
               << "Let the point be: " << P2 << '\n';
 
-    Poly2.Log();
-    const bool inner = Poly2.InnerPoint(P2);
+    Poly2.log();
+    const bool inner = Poly2.innerPoint(P2);
 
     std::cout << "Expected: true\n"
               << "Actual:\t " << std::boolalpha << inner << '\n';
@@ -261,9 +263,9 @@ void test3() {
     std::cout << "4. Cheking if a given polygon is inside a circle \n"
               << "that is centered at the origin and has a radius R.\n\n"
               << "Let R be 10.45\n";
-    Poly3.Log();
+    Poly3.log();
 
-    const bool inside = Poly3.InsideCircle(10.45);
+    const bool inside = Poly3.insideCircle(10.45);
     std::cout << "Expected: true\n"
               << "Actual: " << std::boolalpha << inside << '\n';
 
@@ -285,15 +287,15 @@ void test4() {
               << "Let's create a container: \n";
 
     Shapes container;
-    container.Log();
+    container.log();
     std::cout << "\nSo let's add some figures to the container: \n";
 
-    container.Add(new Circle(Point(6.7, 5.5), Point(3.4, 2.2)));
-    container.Add(new Polygon(Point(3.7, 5.9), Point(6.6, 8.4), 7));
-    container.Add(new Triangle(Point(4.5, 6.1), Point(2.5, 3.4)));
-    container.Add(new Square(Point(3.2, 4.5), Point(7.6, 7.1)));
+    container.add(new Circle(Point(6.7, 5.5), Point(3.4, 2.2)));
+    container.add(new Polygon(Point(3.7, 5.9), Point(6.6, 8.4), 7));
+    container.add(new Triangle(Point(4.5, 6.1), Point(2.5, 3.4)));
+    container.add(new Square(Point(3.2, 4.5), Point(7.6, 7.1)));
 
-    container.Log();
+    container.log();
     const unsigned size = container.getSize();
 
     std::cout << "Expected size: 4\n"
@@ -306,7 +308,7 @@ void test4() {
 
 
     std::cout << "Let's now erase the content of the container!\n";
-    container.Erase();
+    container.erase();
     const unsigned erased = container.getSize();
 
     std::cout << "Expected size: 0\n"
@@ -324,4 +326,3 @@ void test4() {
  * we implemented earlier during the semester, so
  * I set aside testing its functionality.
  */
-

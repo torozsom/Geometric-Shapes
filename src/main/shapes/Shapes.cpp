@@ -24,7 +24,7 @@ unsigned Shapes::getSize() const { return size; }
  * collection with a Figure pointer
  * @param fp the pointer of the object to be added
  */
-void Shapes::Add(Figure* fp) {
+void Shapes::add(Figure* fp) {
     if (fp != nullptr) {
         const auto temp = new Figure*[size + 1];
         for (unsigned i = 0; i < size; ++i)
@@ -40,7 +40,7 @@ void Shapes::Add(Figure* fp) {
  * @brief Empties the array of the heterogen
  * collection — deletes its elements
  */
-void Shapes::Erase() {
+void Shapes::erase() {
     if (size != 0) {
         for (unsigned i = 0; i < size; ++i) {
             delete pData[i];
@@ -52,14 +52,14 @@ void Shapes::Erase() {
 
 
 // Logs the properties of the current heterogen collection
-void Shapes::Log() const {
+void Shapes::log() const {
     if (size == 0)
         std::cout << "There is nothing in the array yet.\n\n";
     else {
         std::cout << "_________________________________\n\n";
         for (unsigned i = 0; i < size; ++i) {
             std::cout << '(' << i + 1 << ". element) \n";
-            pData[i]->Log();
+            pData[i]->log();
         }
         std::cout << "_________________________________\n\n";
     }
@@ -80,4 +80,3 @@ Shapes::~Shapes() {
         delete pData[i];
     delete[] pData;
 };
-

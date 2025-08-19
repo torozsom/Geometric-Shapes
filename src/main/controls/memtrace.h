@@ -110,7 +110,6 @@ END_NAMESPACE
 #        include <cstdio>
 START_NAMESPACE
 class atexit_class {
-  private:
     static int counter;
     static int err;
 

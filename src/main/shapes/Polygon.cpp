@@ -30,7 +30,7 @@ Polygon::Polygon(const Point& p1, const Point& p2, const unsigned n) : size(n) {
     vertices[0] = p2;
     for (unsigned i = 1; i < size; ++i) {
         vertices[i] = vertices[i - 1];
-        vertices[i].Rotation(p1, innerAngle);
+        vertices[i].rotate(p1, innerAngle);
     }
     setPoint(vertices[0]);
 }
@@ -47,7 +47,7 @@ Polygon::Polygon(const Polygon& p) : Figure(p.middle, p.point), size(p.size) {
 unsigned Polygon::getSize() const { return size; }
 
 
-Point* Polygon::getVertices() const { return const_cast<Point *>(vertices); }
+Point* Polygon::getVertices() const { return const_cast<Point*>(vertices); }
 
 
 // Setter — sets the size of the polygon
@@ -59,9 +59,9 @@ void Polygon::setSize(const unsigned n) { size = n; }
  * through the given angle
  * @param angle angle of rotation in degrees
  */
-void Polygon::Rotate(const double angle) {
+void Polygon::rotate(const double angle) {
     for (unsigned i = 0; i < size; ++i)
-        vertices[i].Rotation(middle, angle);
+        vertices[i].rotate(middle, angle);
 }
 
 
@@ -70,7 +70,7 @@ void Polygon::Rotate(const double angle) {
  * by the given vector
  * @param v vector of translation
  */
-void Polygon::Translate(const Point& v) {
+void Polygon::translate(const Point& v) {
     for (unsigned i = 0; i < size; ++i)
         vertices[i] += v;
     middle += v;
@@ -78,15 +78,15 @@ void Polygon::Translate(const Point& v) {
 
 
 // Calculates the circumference of the current polygon
-double Polygon::Circumference() const {
-    return size * Distance(vertices[0],
+double Polygon::circumference() const {
+    return size * distance(vertices[0],
                            vertices[1]); // polygons have equally long sides
 }
 
 
 // Calculates the area of the current polygon
-double Polygon::Area() const {
-    const double s = Distance(vertices[0], vertices[1]);
+double Polygon::area() const {
+    const double s = distance(vertices[0], vertices[1]);
     const double triangle = s * s / (4.0 * tan(M_PI / size));
     return size * triangle;
 }
@@ -98,15 +98,17 @@ double Polygon::Area() const {
  * @param p the point to be checked
  * @return bool
  */
-bool Polygon::InnerPoint(const Point& p) const {
+bool Polygon::innerPoint(const Point& p) const {
     unsigned count = 0;
 
     for (unsigned i = 0; i < size; ++i) {
         const Point current = vertices[i];
 
-        if (const Point next = vertices[(i + 1) % size]; current.y > p.y != next.y > p.y) {
+        if (const Point next = vertices[(i + 1) % size];
+            current.y > p.y != next.y > p.y) {
             const double intersectX = (next.x - current.x) * (p.y - current.y) /
-                                      (next.y - current.y) + current.x;
+                                          (next.y - current.y) +
+                                      current.x;
             if (p.x < intersectX)
                 count++;
         }
@@ -121,11 +123,11 @@ bool Polygon::InnerPoint(const Point& p) const {
  * @param r the radius of the circle
  * @return bool
  */
-bool Polygon::InsideCircle(const double r) const {
+bool Polygon::insideCircle(const double r) const {
     const Point origin(0.0, 0.0);
 
     for (unsigned i = 0; i < size; ++i)
-        if (const double d = Distance(origin, vertices[i]); d > r)
+        if (const double d = distance(origin, vertices[i]); d > r)
             return false;
 
     return true;
@@ -133,7 +135,7 @@ bool Polygon::InsideCircle(const double r) const {
 
 
 // Logs the properties of the current polygon
-void Polygon::Log() const {
+void Polygon::log() const {
     std::cout << "This polygon has " << size << " vertices: \n";
     for (unsigned i = 0; i < size; ++i)
         std::cout << vertices[i] << '\n';
@@ -175,9 +177,8 @@ std::ostream& operator<<(std::ostream& os, const Polygon* p) {
         os << p->getVertices()[i];
 
     os << "Its middle point is: " << p->getMiddle()
-       << "It has an area of: " << p->Area() << '\n'
-       << "And its circumference is: " << p->Circumference() << '\n';
+       << "It has an area of: " << p->area() << '\n'
+       << "And its circumference is: " << p->circumference() << '\n';
 
     return os;
 }
-

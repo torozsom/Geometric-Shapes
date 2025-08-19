@@ -4,12 +4,14 @@
  * its main functionalities.
  */
 
+
 #include "../test/Test.hpp"
 #include "controls/Controls.hpp"
 #include "controls/memtrace.h"
 #include "shapes/Figure.hpp"
 #include "shapes/Shapes.hpp"
 #include "utils/Point.hpp"
+
 
 int main() {
 
@@ -40,16 +42,16 @@ int main() {
 
         switch (c) {
         case '1':
-            LogFile("../figures.txt");
+            logFile("../figures.txt");
             break;
 
         case '2':
-            data.Erase();
-            StoreFigures("../figures.txt", &data);
+            data.erase();
+            storeFigures("../figures.txt", &data);
             break;
 
         case '3':
-            data.Log();
+            data.log();
             break;
 
         case '4':
@@ -59,8 +61,8 @@ int main() {
                       << "-------------------------------------------------\n";
 
             for (unsigned i = 0; i < data.getSize(); ++i)
-                if (data[i]->InnerPoint(p))
-                    data[i]->Log();
+                if (data[i]->innerPoint(p))
+                    data[i]->log();
 
             std::cout
                 << "-------------------------------------------------\n\n";
@@ -115,4 +117,3 @@ int main() {
 
     return 0;
 }
-

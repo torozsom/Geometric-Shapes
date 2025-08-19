@@ -22,12 +22,12 @@ class Square final : public Polygon {
 
 
     [[nodiscard]]
-    double Area() const override {
-        return pow(Distance(vertices[0], vertices[1]), 2);
+    double area() const override {
+        return pow(distance(vertices[0], vertices[1]), 2);
     }
 
 
-    void Log() const override {
+    void log() const override {
         std::cout << std::fixed << std::setprecision(2);
         std::cout << "The square's vertices: \n";
         for (unsigned i = 0; i < 4; ++i)
@@ -40,4 +40,3 @@ class Square final : public Polygon {
 };
 
 #endif // SQUARE_HPP
-

@@ -16,7 +16,6 @@
 
 class Circle final : public Figure {
 
-  private:
     double radius;
 
   public:
@@ -29,12 +28,12 @@ class Circle final : public Figure {
     void setRadius(double val);
 
 
-    void Translate(const Point& v) override;
-    [[nodiscard]] double Circumference() const override;
-    [[nodiscard]] double Area() const override;
-    [[nodiscard]] bool InnerPoint(const Point& p) const override;
-    [[nodiscard]] bool InsideCircle(double r) const override;
-    void Log() const override;
+    void translate(const Point& v) override;
+    [[nodiscard]] double circumference() const override;
+    [[nodiscard]] double area() const override;
+    [[nodiscard]] bool innerPoint(const Point& p) const override;
+    [[nodiscard]] bool insideCircle(double r) const override;
+    void log() const override;
 
     bool operator==(const Circle& c) const;
 
@@ -44,4 +43,3 @@ class Circle final : public Figure {
 std::ostream& operator<<(std::ostream& os, const Circle& c);
 
 #endif // CIRCLE_HPP
-

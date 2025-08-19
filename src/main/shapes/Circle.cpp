@@ -4,14 +4,16 @@
  * for the member functions declared in Circle.hpp.
  */
 
+
 #include "Circle.hpp"
+
 
 // default ctor
 Circle::Circle() : radius(0.0) {}
 
 // ctor
 Circle::Circle(const Point& p1, const Point& p2)
-    : Figure(p1, p2), radius(Distance(p1, p2)) {}
+    : Figure(p1, p2), radius(distance(p1, p2)) {}
 
 // copy ctor
 Circle::Circle(const Circle& c) : Figure(c.middle, c.point), radius(c.radius) {}
@@ -30,18 +32,18 @@ void Circle::setRadius(const double r) { radius = r; }
  * by the given vector
  * @param v vector of translation
  */
-void Circle::Translate(const Point& v) {
+void Circle::translate(const Point& v) {
     middle += v;
     point += v;
 }
 
 
 // Calculates the circumference of the current circle
-double Circle::Circumference() const { return 2 * radius * M_PI; }
+double Circle::circumference() const { return 2 * radius * M_PI; }
 
 
 // Calculates the circumference of the current circle
-double Circle::Area() const { return radius * radius * M_PI; }
+double Circle::area() const { return radius * radius * M_PI; }
 
 
 /**
@@ -50,8 +52,8 @@ double Circle::Area() const { return radius * radius * M_PI; }
  * @param p the point to be checked
  * @return bool
  */
-bool Circle::InnerPoint(const Point& p) const {
-    return Distance(middle, p) <= radius;
+bool Circle::innerPoint(const Point& p) const {
+    return distance(middle, p) <= radius;
 }
 
 
@@ -61,13 +63,13 @@ bool Circle::InnerPoint(const Point& p) const {
  * @param r the radius of the origin centered circle
  * @return bool
  */
-bool Circle::InsideCircle(const double r) const {
-    return Distance(Point(0.0, 0.0), middle) + radius <= r;
+bool Circle::insideCircle(const double r) const {
+    return distance(Point(0.0, 0.0), middle) + radius <= r;
 }
 
 
 // Logging the properties of the current circle
-void Circle::Log() const {
+void Circle::log() const {
     std::cout << std::fixed << std::setprecision(2);
     std::cout << "The circle's radius is: " << radius << "\n"
               << "Middle point: " << middle << '\n'
@@ -90,8 +92,8 @@ bool Circle::operator==(const Circle& c) const {
 std::ostream& operator<<(std::ostream& os, const Circle& c) {
     std::cout << std::fixed << std::setprecision(2);
     os << "The radius of the circle is: " << c.getRadius() << "\n"
-       << "The circle's circumference is: " << c.Circumference() << "\n"
-       << "The circle's area is: " << c.Area() << "\n"
+       << "The circle's circumference is: " << c.circumference() << "\n"
+       << "The circle's area is: " << c.area() << "\n"
        << "The circle's middle point is: " << c.getMiddle() << "\n\n";
     return os;
 }
@@ -118,4 +120,3 @@ std::istream& operator>>(std::istream& is, Circle& c) {
 
     return is;
 }
-

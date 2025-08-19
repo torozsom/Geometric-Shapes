@@ -24,7 +24,7 @@ Point::Point(const Point& p) = default;
  * @param center the center point of rotation
  * @param angle the angle of rotation in degrees
  */
-void Point::Rotation(const Point& center, const double angle) {
+void Point::rotate(const Point& center, const double angle) {
     const double radians = angle * M_PI / 180.0;
 
     const double cosTheta = cos(radians);
@@ -135,7 +135,6 @@ std::istream& operator>>(std::istream& is, Point& p) {
  * @param p2 ending point
  * @return double
  */
-double Distance(const Point& p1, const Point& p2) {
+double distance(const Point& p1, const Point& p2) {
     return sqrt(pow(p2.x - p1.x, 2) + pow(p2.y - p1.y, 2));
 }
-

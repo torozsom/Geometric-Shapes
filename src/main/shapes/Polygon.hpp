@@ -16,12 +16,13 @@
 
 class Polygon : public Figure {
 
-  private:
+    unsigned size;                          // number of vertices
     static constexpr unsigned MAXSIZE = 15; // maximum number of vertices
-    unsigned size; // number of vertices
+
 
   protected:
     Point vertices[MAXSIZE]; // array of vertices
+
 
   public:
     Polygon();
@@ -32,18 +33,14 @@ class Polygon : public Figure {
     [[nodiscard]] Point* getVertices() const;
     void setSize(unsigned n);
 
+    void rotate(double angle);
+    [[nodiscard]] double area() const override;
+    void log() const override;
 
-    void Rotate(double angle);
-
-    [[nodiscard]] double Area() const override;
-
-    void Log() const override;
-
-
-    void Translate(const Point& v) override;
-    [[nodiscard]] double Circumference() const override;
-    [[nodiscard]] bool InnerPoint(const Point& p) const override;
-    [[nodiscard]] bool InsideCircle(double r) const override;
+    void translate(const Point& v) override;
+    [[nodiscard]] double circumference() const override;
+    [[nodiscard]] bool innerPoint(const Point& p) const override;
+    [[nodiscard]] bool insideCircle(double r) const override;
 
     bool operator==(const Polygon& p) const;
 
@@ -55,4 +52,3 @@ std::ostream& operator<<(std::ostream& os, const Polygon* p);
 
 
 #endif // POLYGON_HPP
-

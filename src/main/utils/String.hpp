@@ -5,16 +5,17 @@
  * user and reading files contents.
  */
 
+
 #ifndef STRING_HPP
 #define STRING_HPP
+
 
 #include "../controls/memtrace.h"
 #include <cstring>
 #include <iostream>
 
-class String {
 
-  private:
+class String {
     char* data;
     unsigned len{}; // without \0
 
@@ -44,4 +45,3 @@ std::ostream& operator<<(std::ostream& os, const String& s);
 
 
 #endif // STRING_HPP
-

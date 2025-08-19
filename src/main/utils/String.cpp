@@ -2,7 +2,9 @@
  * \file String.cpp
  */
 
+
 #include "String.hpp"
+
 
 // default ctor
 String::String() {
@@ -147,4 +149,3 @@ bool operator==(const String& s, const char* text) {
 std::ostream& operator<<(std::ostream& os, const String& s) {
     return os << s.c_str();
 }
-

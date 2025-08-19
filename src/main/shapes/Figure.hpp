@@ -1,5 +1,5 @@
 /***
- * \file Figures.hpp
+ * \file Figure.hpp
  * This file contains the abstract class
  * for the 2D geometric figures in general.
  */
@@ -18,6 +18,7 @@ class Figure {
     Point middle;
     Point point;
 
+
   public:
     Figure() = default;
     Figure(const Point& p1, const Point& p2) : middle(p1), point(p2) {}
@@ -27,16 +28,16 @@ class Figure {
     void setPoint(const Point& p) { point = p; };
 
 
-    Point getMiddle() const { return middle; };
-    Point getPoint() const { return point; };
+    [[nodiscard]] Point getMiddle() const { return middle; };
+    [[nodiscard]] Point getPoint() const { return point; };
 
 
-    virtual void Translate(const Point& v) = 0;
-    [[nodiscard]] virtual double Circumference() const = 0;
-    [[nodiscard]] virtual double Area() const = 0;
-    [[nodiscard]] virtual bool InnerPoint(const Point& p) const = 0;
-    [[nodiscard]] virtual bool InsideCircle(double r) const = 0;
-    virtual void Log() const = 0;
+    virtual void translate(const Point& v) = 0;
+    [[nodiscard]] virtual double circumference() const = 0;
+    [[nodiscard]] virtual double area() const = 0;
+    [[nodiscard]] virtual bool innerPoint(const Point& p) const = 0;
+    [[nodiscard]] virtual bool insideCircle(double r) const = 0;
+    virtual void log() const = 0;
 
 
     virtual ~Figure() = default;
@@ -44,4 +45,3 @@ class Figure {
 
 
 #endif // FIGURE_HPP
-

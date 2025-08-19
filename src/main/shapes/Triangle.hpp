@@ -22,12 +22,12 @@ class Triangle final : public Polygon {
 
 
     [[nodiscard]]
-    double Area() const override {
-        return pow(Distance(vertices[0], vertices[1]), 2) * sqrt(3) / 4.0;
+    double area() const override {
+        return pow(distance(vertices[0], vertices[1]), 2) * sqrt(3) / 4.0;
     }
 
 
-    void Log() const override {
+    void log() const override {
         std::cout << std::fixed << std::setprecision(2);
         std::cout << "The triangle's vertices: \n";
         for (unsigned i = 0; i < 3; ++i)
@@ -39,4 +39,3 @@ class Triangle final : public Polygon {
 };
 
 #endif // TRIANGLE_HPP
-
